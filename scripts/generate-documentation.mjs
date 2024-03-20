@@ -187,7 +187,7 @@ const writeDocs = (docs) => {
       .h2('Script')
       .codeBlock(doc.source, 'bash')
       .paragraph(
-        (txt) => txt.link('View Script', `../../helpers/${doc.helper}/${doc.section}/${doc.file.replace('.md', '.sh')}`)
+        (txt) => txt.link('View Script', `../../../helpers/${doc.helper}/${doc.section}/${doc.file.replace('.md', '.sh')}`)
       );
 
     const dirPath = path.join(DIR_PATH_DOCS, doc.helper, doc.section);

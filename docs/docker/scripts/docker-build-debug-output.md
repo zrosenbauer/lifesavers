@@ -50,4 +50,4 @@ docker buildx build --progress plain --no-cache . -t docker_build_debug_larger_l
 
 ```
 
-[View Script](../../helpers/docker/scripts/docker-build-debug-output.sh)
+[View Script](../../../helpers/docker/scripts/docker-build-debug-output.sh)
