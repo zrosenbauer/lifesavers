@@ -54,12 +54,12 @@ const readHelperScriptFileNames = (dirPath) => {
  * Extract the documentation data from a bash script
  * 
  * @param {string} filePath
- * @typedef {{title: string, summary: string, description: string, example: string}} BashScriptDocsData
+ * @typedef {{title: string, summary: string, description: string, example: string, source: string}} BashScriptDocsData
  * @returns {BashScriptDocsData}
  */
 const extractBashScriptDocsData = (filePath) => {
-  const fileContent = fs.readFileSync(path.join(DIR_PATH_HELPERS, filePath), 'utf8')
-    .replace('#!/usr/bin/env bash\n', '')
+  const rawFileContent = fs.readFileSync(path.join(DIR_PATH_HELPERS, filePath), 'utf8')
+  const fileContent = rawFileContent.replace('#!/usr/bin/env bash\n', '')
 
   const splitOnHeaderTitleDividers = fileContent
     .split('#==========================================================================\n')
@@ -81,6 +81,7 @@ const extractBashScriptDocsData = (filePath) => {
     .trim();
 
   return {
+    source: rawFileContent,
     title,
     summary,
     description,
@@ -181,8 +182,13 @@ const writeDocs = (docs) => {
       .paragraph(doc.summary)
       .h2('Description')
       .paragraph(doc.description)
-      .h2('Example')
-      .paragraph(doc.example);
+      .h2('Usage')
+      .paragraph(doc.example)
+      .h2('Script')
+      .codeBlock(doc.source, 'bash')
+      .paragraph(
+        (txt) => txt.link('View Script', `../../helpers/${doc.helper}/${doc.section}/${doc.file.replace('.md', '.sh')}`)
+      );
 
     const dirPath = path.join(DIR_PATH_DOCS, doc.helper, doc.section);
     const fullPath = path.join(dirPath, doc.file);

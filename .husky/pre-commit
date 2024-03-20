@@ -1,1 +1,2 @@
 yarn run scripts:generate-docs
+git add -A
