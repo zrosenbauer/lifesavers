@@ -92,7 +92,7 @@ const extractBashScriptDocsData = (filePath) => {
  * Get the data for generating the documentation
  * 
  * @typedef {{helper: string, file: string, section: string} & BashScriptDocsData} Doc
- * @typedef {{title: string, summary: string, docs: Doc[]}} TableOfContents
+ * @typedef {{title: string, summary: string, helperId: string, docs: Doc[]}} TableOfContents
  * 
  * @returns {{toc: TableOfContents[], docs: Doc[]}}
  */
@@ -107,6 +107,7 @@ const getGenerationData = () => {
     const tableOfContentsItem = {
       title: generateItem.title,
       summary: generateItem.summary,
+      helperId: generateItem.helperId,
       docs: []
     };
 
@@ -200,7 +201,7 @@ const writeReadmeToc = (tableOfContents) => {
 
   for (const item of tableOfContents) {
     content
-      .h3((txt) => txt.link(item.title, `./docs/${_.kebabCase(item.title)}.md`))
+      .h3((txt) => txt.link(item.title, `./docs/${[item.helperId]}/README.md`))
       .paragraph(item.summary)
       .bulletList(item.docs.map((doc) => {
         const filePath = path.join(doc.helper, doc.section, doc.file);
