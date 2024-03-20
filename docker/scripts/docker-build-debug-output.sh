@@ -18,15 +18,10 @@
 ## Change this to your desired log file
 LOG_FILE=docker-build-debug-output.log
 
-if ! docker buildx inspect docker_build_debug_larger_log; then
- docker buildx create --use --name docker_build_debug_larger_log --driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=50000000
-else
-  echo "Buildx instance already exists, skipping creation"
-fi
+docker buildx create --use --name docker_build_debug_larger_log --driver-opt env.BUILDKIT_STEP_LOG_MAX_SIZE=50000000 &> /dev/null
 
 echo "==============================" > $LOG_FILE
 echo "[DEBUG] Debugging Logger Build $(date '+%F_%H:%M:%S:%Z')" >> $LOG_FILE
 echo "==============================" >> $LOG_FILE
 
 docker buildx build --progress plain --no-cache . -t docker_build_debug_larger_log 2>&1 | tee -a $LOG_FILE 
-
