@@ -5,7 +5,7 @@ Helpful Scripts and Tools for debugging &amp; other developer tasks!
 ## Table of Contents
 
 <!-- docs:start -->
-### [🐳 Docker](./docs/🐳-docker.md)
+### [🐳 Docker](./docs/docker/README.md)
 
 Helpful scripts, tools, and resources for working with Docker.
 
