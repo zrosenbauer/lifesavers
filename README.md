@@ -1,6 +1,14 @@
-# 🛟 LifeSavers
+<div>
+    <p align="center">
+        <img src="/.github/assets/logo.png" align="center" width="0" />
+    </p>
+</div>
 
-Helpful Scripts and Tools for debugging &amp; other developer tasks!
+<hr />
+
+<p align="center">
+  Helpful Scripts and Tools for debugging &amp; other developer tasks!
+</p>
 
 ## Table of Contents
 
